@@ -11,7 +11,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("marjorie02/guia-jenkins:${env.BUILD_NUMBER}")
+                    dockerImage = docker.build("marjorie02/guia-jenkins:${env.BUILD_NUMBER}", "./src")
                 }
             }
         }
