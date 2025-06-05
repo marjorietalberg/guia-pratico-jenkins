@@ -11,7 +11,26 @@
   </a>
 </div>
 
-### Objetivo 
+
+ <table>
+  <tr>
+    <td width="60%">
+      <h2>🎯 Objetivo</h2>
+      <p>
+        O objetivo deste projeto foi realizar a configuração e execução de um pipeline de <b>CI/CD</b> totalmente em ambiente <b>local</b>, utilizando o sistema operacional <b>Ubuntu</b>.<br><br>
+        Foram realizadas as seguintes etapas:<br>
+        - 🐳 <b>Instalação do Docker</b> no ambiente local para gerenciamento de containers.<br>
+        - ⚙️ <b>Implantação do Jenkins</b>, utilizando Docker, para orquestrar e automatizar processos de integração e entrega contínua (<b>CI/CD</b>).<br>
+        - 🔧 Configuração do <b>pipeline CI/CD no Jenkins</b>, que executa as etapas de build, teste e deploy automatizado.<br>
+        - ☸️ Integração com o <b>Kubernetes local</b>, para realizar o deploy das aplicações de forma automatizada e escalável dentro dos clusters.<br><br>
+        Todo o processo foi realizado localmente, sem uso de serviços em nuvem, permitindo total controle do ambiente e proporcionando aprendizado prático sobre automação, integração e deploy de aplicações com <b>Jenkins</b>, <b>Docker</b> e <b>Kubernetes</b>.
+      </p>
+    </td>
+    <td width="40%">
+      <img src="https://github.com/user-attachments/assets/1615189d-6447-46b5-9414-bbd96af02ec4" alt="Projeto CI/CD" height="350px" />
+    </td>
+  </tr>
+</table>
 
 
 ### Instalação do Ambiente
