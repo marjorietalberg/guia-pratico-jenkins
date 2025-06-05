@@ -1,87 +1,185 @@
-<!doctype html>
-<html lang="pt-br" class="h-100">
+<!DOCTYPE html>
+<html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Conversor de Temperatura</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Conversor de Temperatura 🌡️</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet" />
     <style>
-        body {
-            background-color: #f8f9fa;
+        /* Reset e base */
+        * {
+            box-sizing: border-box;
         }
 
-        .navbar {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa, #e0f7fa);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            color: #02416b;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
         }
 
         .card {
-            border: none;
-            border-radius: 1rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            max-width: 400px;
+            width: 100%;
         }
 
-        .footer {
-            background-color: #f1f1f1;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: 2px solid #02416b;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        select:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #0369a1;
+            box-shadow: 0 0 6px #0369a1;
+        }
+
+        button {
+            width: 100%;
+            background-color: #0369a1;
+            border: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 12px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 8px rgba(3, 105, 161, 0.6);
+        }
+
+        button:hover {
+            background-color: #02416b;
+            box-shadow: 0 6px 12px rgba(2, 65, 107, 0.8);
+        }
+
+        #resultado {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #d1e7dd;
+            color: #0f5132;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(15, 81, 50, 0.3);
+            user-select: none;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #02416b;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        @media(max-width: 450px) {
+            .card {
+                padding: 20px;
+            }
+
+            button {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 
-<body class="d-flex flex-column h-100">
+<body>
+    <div class="card" role="main">
+        <h1>Conversor de Temperatura 🌡️</h1>
+        <label for="conversao">Selecione a conversão:</label>
+        <select id="conversao" aria-label="Tipo de conversão">
+            <option value="celsius-fahrenheit">🌡️ Celsius → Fahrenheit</option>
+            <option value="fahrenheit-celsius">🔥 Fahrenheit → Celsius</option>
+        </select>
 
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">Conversor</a>
-            </div>
-        </nav>
-    </header>
+        <label for="valor">Valor:</label>
+        <input type="number" id="valor" aria-label="Valor a converter" placeholder="Ex: 25" step="any" />
 
-    <main class="flex-shrink-0">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card p-4">
-                        <h2 class="mb-4 text-center">Conversor de Temperatura</h2>
-                        <p class="text-center text-muted">Host: <strong><%= maquina %></strong></p>
-                        <form action="/" method="post">
-                            <div class="mb-3">
-                                <label for="selectTemp" class="form-label">Selecione a conversão:</label>
-                                <select class="form-select" id="selectTemp" name="selectTemp">
-                                    <option selected value="1">Celsius → Fahrenheit</option>
-                                    <option value="2">Fahrenheit → Celsius</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="valorRef" class="form-label">Valor:</label>
-                                <input type="number" class="form-control" id="valorRef" name="valorRef" required>
-                            </div>
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary">Converter</button>
-                            </div>
-                        </form>
+        <button id="btnConverter" type="button">Converter</button>
 
-                        <% if(valorConvertido){ %>
-                        <div class="alert alert-success mt-4 text-center" role="alert">
-                            <h4 class="alert-heading">Resultado:</h4>
-                            <p><strong><%= valorConvertido %></strong></p>
-                        </div>
-                        <% } %>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+        <div id="resultado" aria-live="polite" aria-atomic="true" hidden></div>
+    </div>
 
-    <footer class="footer mt-auto py-3">
-        <div class="container text-center">
-            <span class="text-muted">&copy; 2025 Conversor de Temperatura</span>
-        </div>
-    </footer>
+    <footer>&copy; 2025 Conversor de Temperatura | Desenvolvido por Marjorie 💻</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const btnConverter = document.getElementById('btnConverter');
+        const selectConversao = document.getElementById('conversao');
+        const inputValor = document.getElementById('valor');
+        const resultadoDiv = document.getElementById('resultado');
+
+        btnConverter.addEventListener('click', () => {
+            const valor = parseFloat(inputValor.value);
+            const tipo = selectConversao.value;
+
+            if (isNaN(valor)) {
+                resultadoDiv.textContent = 'Por favor, insira um valor numérico válido.';
+                resultadoDiv.style.backgroundColor = '#f8d7da';
+                resultadoDiv.style.color = '#842029';
+                resultadoDiv.hidden = false;
+                return;
+            }
+
+            let resultado;
+
+            if (tipo === 'celsius-fahrenheit') {
+                // Celsius para Fahrenheit
+                const f = (valor * 9 / 5) + 32;
+                resultado = `${valor.toFixed(2)} °C = ${f.toFixed(2)} °F`;
+            } else if (tipo === 'fahrenheit-celsius') {
+                // Fahrenheit para Celsius
+                const c = (valor - 32) * 5 / 9;
+                resultado = `${valor.toFixed(2)} °F = ${c.toFixed(2)} °C`;
+            } else {
+                resultado = 'Tipo de conversão inválido!';
+            }
+
+            resultadoDiv.textContent = resultado;
+            resultadoDiv.style.backgroundColor = '#d1e7dd';
+            resultadoDiv.style.color = '#0f5132';
+            resultadoDiv.hidden = false;
+        });
+
+        // Opcional: foco no input quando abrir
+        inputValor.focus();
+    </script>
 </body>
 
 </html>
