@@ -13,7 +13,7 @@ spec:
         app: guia-jenkins
     spec:
       containers:
-      - name: guia-jenkins
-        image: marjorietalberg/guia-jenkins:{{tag}}
-        ports:
-        - containerPort: 8080
+        - name: guia-jenkins
+          image: marjorietalberg/guia-jenkins:{{tag}}
+          ports:
+            - containerPort: 8080
