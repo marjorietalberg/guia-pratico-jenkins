@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "seuusuario/guia-jenkins"
+        IMAGE_NAME = "marjorietalberg/guia-jenkins"
         TAG = "${env.BUILD_ID}"
     }
 
@@ -17,7 +17,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    echo 'Construindo imagem Docker...'
+                    echo '🔨 Construindo imagem Docker...'
                     dockerImage = docker.build("${IMAGE_NAME}:${TAG}", '-f ./src/Dockerfile ./src')
                 }
             }
@@ -26,7 +26,7 @@ pipeline {
         stage('Push Docker Image to DockerHub') {
             steps {
                 script {
-                    echo 'Enviando imagem para o DockerHub...'
+                    echo '🚀 Enviando imagem para o DockerHub...'
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         dockerImage.push('latest')
                         dockerImage.push("${TAG}")
@@ -37,7 +37,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                echo 'Realizando deploy no Kubernetes...'
+                echo '📦 Fazendo deploy no Kubernetes...'
                 withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://192.168.1.81:6443']) {
                     sh """
                     sed -i 's/{{tag}}/${TAG}/g' ./k8s/deployment.yaml
@@ -50,10 +50,10 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline finalizado com sucesso!'
+            echo '✅ Pipeline finalizado com sucesso!'
         }
         failure {
-            echo 'Falha no pipeline.'
+            echo '❌ Pipeline falhou.'
         }
     }
 }
