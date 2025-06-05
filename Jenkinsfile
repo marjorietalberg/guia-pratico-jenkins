@@ -2,38 +2,35 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repository') {
-            steps {
-                echo '🔗 Clonando o repositório...'
-                git branch: 'main', url: 'https://github.com/marjorietalberg/guia-pratico-jenkins.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
-                    echo '🔨 Construindo imagem Docker...'
-                    dockerImage = docker.build('guia-jenkins:latest', './src')
+                    dockerapp = docker.build("marjorietalberg/guia-jenkins:${env.BUILD_ID}", '-f ./src/Dockerfile ./src')
                 }
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Push Docker Image') {
             steps {
                 script {
-                    echo '🚀 Subindo container local...'
-                    dockerImage.run('-d -p 8080:3000')
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        dockerapp.push('latest')
+                        dockerapp.push("${env.BUILD_ID}")
+                    }
                 }
             }
         }
-    }
 
-    post {
-        always {
-            echo '✅ Pipeline finalizado.'
-        }
-        failure {
-            echo '❌ Pipeline falhou.'
+        stage('Deploy no Kubernetes') {
+            environment {
+                tag_version = "${env.BUILD_ID}"
+            }
+            steps {
+                withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://192.168.1.81:6443']) {
+                    sh "sed -i 's/{{tag}}/${tag_version}/g' ./k8s/deployment.yaml"
+                    sh 'kubectl apply -f k8s/deployment.yaml'
+                }
+            }
         }
     }
 }
