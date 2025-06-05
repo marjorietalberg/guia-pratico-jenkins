@@ -1,36 +1,59 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "seuusuario/guia-jenkins"
+        TAG = "${env.BUILD_ID}"
+    }
+
     stages {
-        stage('Build a Docker Image') {
+        stage('Clone Repository') {
+            steps {
+                echo 'Clonando o repositório...'
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerapp = docker.build("marjorietalberg/guia-jenkins:${env.BUILD_ID}", '-f ./src/Dockerfile ./src')
+                    echo 'Construindo imagem Docker...'
+                    dockerImage = docker.build("${IMAGE_NAME}:${TAG}", '-f ./src/Dockerfile ./src')
                 }
             }
         }
 
-        stage('Push a Docker Image') {
+        stage('Push Docker Image to DockerHub') {
             steps {
                 script {
+                    echo 'Enviando imagem para o DockerHub...'
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        dockerapp.push('latest')
-                        dockerapp.push("${env.BUILD_ID}")
+                        dockerImage.push('latest')
+                        dockerImage.push("${TAG}")
                     }
                 }
             }
         }
 
-        stage('Deploy no Kubernetes') {
-            environment {
-                tag_version = "${env.BUILD_ID}"
-            }
+        stage('Deploy to Kubernetes') {
             steps {
-                withKubeConfig([credentialsId: 'kubeconfig']) {
-                    sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/deployment.yaml'
-                    sh 'kubectl apply -f ./k8s/deployment.yaml'
+                echo 'Realizando deploy no Kubernetes...'
+                withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://192.168.1.81:6443']) {
+                    sh """
+                    sed -i 's/{{tag}}/${TAG}/g' ./k8s/deployment.yaml
+                    kubectl apply -f ./k8s/deployment.yaml
+                    """
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline finalizado com sucesso!'
+        }
+        failure {
+            echo 'Falha no pipeline.'
         }
     }
 }
