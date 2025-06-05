@@ -1,19 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: guia-jenkins
+  name: conversao-temperatura
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: guia-jenkins
+      app: conversao-temperatura
   template:
     metadata:
       labels:
-        app: guia-jenkins
+        app: conversao-temperatura
     spec:
       containers:
-        - name: guia-jenkins
-          image: marjorietalberg/guia-jenkins:{{tag}}
-          ports:
-            - containerPort: 8080
+      - name: conversao-temperatura
+        image: marjorie02/guia-jenkins:teste
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: conversao-temperatura
+spec:
+  selector:
+    app: conversao-temperatura
+  type: NodePort
+  ports:
+  - port: 80          # porta do serviço no cluster
+    targetPort: 8080  # porta que o container está escutando
+    nodePort: 9090    # porta externa no node para acesso
