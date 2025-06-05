@@ -9,14 +9,14 @@
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
         rel="stylesheet" />
     <style>
-        /* Reset e base */
+        /* Reset básico */
         * {
             box-sizing: border-box;
         }
 
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa, #e0f7fa);
+            background: linear-gradient(135deg, #e0f0f5, #ffffff);
             margin: 0;
             padding: 20px;
             display: flex;
@@ -24,105 +24,156 @@
             min-height: 100vh;
             align-items: center;
             justify-content: center;
+            color: #1a1a1a;
         }
 
         h1 {
-            color: #02416b;
-            margin-bottom: 20px;
+            color: #014a75;
+            margin-bottom: 25px;
             text-align: center;
             font-weight: 700;
+            font-size: 2.2rem;
+            user-select: none;
         }
 
         .card {
             background: white;
-            padding: 30px 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-            max-width: 400px;
+            padding: 35px 45px;
+            border-radius: 18px;
+            box-shadow: 0 12px 25px rgba(1, 74, 117, 0.18);
+            max-width: 420px;
             width: 100%;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 20px 40px rgba(1, 74, 117, 0.3);
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #333;
-            font-size: 1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #014a75;
+            font-size: 1.05rem;
         }
 
         select,
         input[type="number"] {
             width: 100%;
-            padding: 10px 15px;
-            font-size: 1rem;
-            border: 2px solid #02416b;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            transition: border-color 0.3s;
+            padding: 12px 18px;
+            font-size: 1.05rem;
+            border: 2.5px solid #014a75;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         select:focus,
         input[type="number"]:focus {
             outline: none;
-            border-color: #0369a1;
-            box-shadow: 0 0 6px #0369a1;
+            border-color: #0288d1;
+            box-shadow: 0 0 8px #0288d1;
         }
 
         button {
             width: 100%;
-            background-color: #0369a1;
+            background-color: #0288d1;
             border: none;
             color: white;
             font-weight: 700;
-            font-size: 1.1rem;
-            padding: 12px 0;
-            border-radius: 12px;
+            font-size: 1.25rem;
+            padding: 14px 0;
+            border-radius: 16px;
             cursor: pointer;
-            transition: background-color 0.3s;
-            box-shadow: 0 4px 8px rgba(3, 105, 161, 0.6);
-        }
-
-        button:hover {
-            background-color: #02416b;
-            box-shadow: 0 6px 12px rgba(2, 65, 107, 0.8);
-        }
-
-        #resultado {
-            margin-top: 25px;
-            padding: 15px;
-            background-color: #d1e7dd;
-            color: #0f5132;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1.2rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(15, 81, 50, 0.3);
+            box-shadow: 0 6px 15px rgba(2, 136, 209, 0.6);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             user-select: none;
         }
 
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            color: #02416b;
-            font-weight: 500;
-            font-size: 0.9rem;
+        button:hover {
+            background-color: #014a75;
+            box-shadow: 0 8px 20px rgba(1, 74, 117, 0.8);
+            transform: scale(1.05);
         }
 
-        @media(max-width: 450px) {
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #resultado {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #d1e7dd;
+            color: #0f5132;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(15, 81, 50, 0.3);
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+            user-select: none;
+            min-height: 50px;
+        }
+
+        #resultado.erro {
+            background-color: #f8d7da;
+            color: #842029;
+            box-shadow: 0 6px 15px rgba(132, 32, 41, 0.3);
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #014a75;
+            font-weight: 600;
+            font-size: 1rem;
+            user-select: none;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
             .card {
-                padding: 20px;
+                padding: 25px 30px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
             }
 
             button {
+                font-size: 1.1rem;
+                padding: 12px 0;
+            }
+
+            label {
                 font-size: 1rem;
+            }
+
+            select,
+            input[type="number"] {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+
+            #resultado {
+                font-size: 1.1rem;
+                padding: 16px;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="card" role="main">
-        <h1>Conversor de Temperatura 🌡️</h1>
+    <div class="card" role="main" aria-labelledby="tituloConversor">
+        <h1 id="tituloConversor">Conversor de Temperatura 🌡️</h1>
+
         <label for="conversao">Selecione a conversão:</label>
         <select id="conversao" aria-label="Tipo de conversão">
             <option value="celsius-fahrenheit">🌡️ Celsius → Fahrenheit</option>
@@ -132,7 +183,7 @@
         <label for="valor">Valor:</label>
         <input type="number" id="valor" aria-label="Valor a converter" placeholder="Ex: 25" step="any" />
 
-        <button id="btnConverter" type="button">Converter</button>
+        <button id="btnConverter" type="button" aria-describedby="resultado">Converter</button>
 
         <div id="resultado" aria-live="polite" aria-atomic="true" hidden></div>
     </div>
@@ -150,9 +201,8 @@
             const tipo = selectConversao.value;
 
             if (isNaN(valor)) {
-                resultadoDiv.textContent = 'Por favor, insira um valor numérico válido.';
-                resultadoDiv.style.backgroundColor = '#f8d7da';
-                resultadoDiv.style.color = '#842029';
+                resultadoDiv.textContent = '⚠️ Por favor, insira um valor numérico válido.';
+                resultadoDiv.classList.add('erro');
                 resultadoDiv.hidden = false;
                 return;
             }
@@ -160,24 +210,21 @@
             let resultado;
 
             if (tipo === 'celsius-fahrenheit') {
-                // Celsius para Fahrenheit
                 const f = (valor * 9 / 5) + 32;
-                resultado = `${valor.toFixed(2)} °C = ${f.toFixed(2)} °F`;
+                resultado = `🌡️ ${valor.toFixed(2)} °C = ${f.toFixed(2)} °F`;
             } else if (tipo === 'fahrenheit-celsius') {
-                // Fahrenheit para Celsius
                 const c = (valor - 32) * 5 / 9;
-                resultado = `${valor.toFixed(2)} °F = ${c.toFixed(2)} °C`;
+                resultado = `🔥 ${valor.toFixed(2)} °F = ${c.toFixed(2)} °C`;
             } else {
-                resultado = 'Tipo de conversão inválido!';
+                resultado = '❌ Tipo de conversão inválido!';
+                resultadoDiv.classList.add('erro');
             }
 
             resultadoDiv.textContent = resultado;
-            resultadoDiv.style.backgroundColor = '#d1e7dd';
-            resultadoDiv.style.color = '#0f5132';
+            resultadoDiv.classList.remove('erro');
             resultadoDiv.hidden = false;
         });
 
-        // Opcional: foco no input quando abrir
         inputValor.focus();
     </script>
 </body>
