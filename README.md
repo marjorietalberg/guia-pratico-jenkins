@@ -145,3 +145,55 @@ Para instalar o kubectl, siga os passos abaixo:
     ```
 
 
+### Automatizando Deploy com Jenkins: Resultado Final + Passo a Passo com Imagens
+
+### 1º Passo – Acessar o Jenkins no Navegador
+  > | Após subir o container do Jenkins, acesse o Jenkins através do seu navegador utilizando seu endereço
+  > | O Jenkins solicita uma senha inicial para desbloqueio. Essa senha é gerada automaticamente na criação do container.
+  > | ➡️ Para obter a senha, execute no terminal:
+```bash
+docker exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+```
+<img src="https://github.com/user-attachments/assets/479ef5e8-bb1d-4584-98dc-877eb8dc2261" alt="Image">
+
+### 2º Passo – Criar sua Conta no Jenkins (Usuário Admin)
+  > | Após concluir a instalação dos plugins, o Jenkins irá direcionar você para a tela de criação do primeiro usuário administrador.
+
+  > | ➡️ Preencha o formulário com seus dados:
+  > | Username: → Seu nome de usuário (será usado para login no Jenkins) 
+
+v Password: → Sua senha (crie uma senha forte e segura)
+
+Confirm password: → Confirme sua senha
+
+Full name: → Seu nome completo
+
+Email address: → Seu e-mail (importante para notificações do Jenkins)
+<img src="https://github.com/user-attachments/assets/eed9e951-292c-48bd-851c-0b88ae302cf9" alt="Image">
+
+### 3º Passo – Customizar o Jenkins (Instalação dos Plugins)
+  > | Após inserir a senha inicial, o Jenkins oferece a opção de personalizar a instalação com plugins.
+  > | ✔️ Escolha a Opção: Install Suggested Plugins
+   > | Essa opção é a mais recomendada para quem está começando, pois instala os plugins essenciais para rodar a maioria dos pipelines.
+
+  > | O Jenkins começará automaticamente a instalação dos plugins padrão, como:
+  > | Git ,Pipeline, SSH Agent, Docker Pipeline, Blue Ocean
+  > | E outros essenciais para integração contínua e deploy.
+
+<img src="https://github.com/user-attachments/assets/f276f09c-e8b3-4ed4-a3cb-b926719a8810" alt="Image">
+
+### 4º Passo – Acessar o Painel Principal e Ir em “Gerenciar Jenkins”
+  > | Após criar sua conta e finalizar a configuração inicial, você será redirecionado para o Painel Principal do Jenkins. 
+ > | Essa seção é o painel central de administração do Jenkins, onde você pode gerenciar configurações, instalar e atualizar plugins, controlar a segurança, configurar ferramentas e realizar outras tarefas administrativas essenciais.
+
+<img src="https://github.com/user-attachments/assets/b68d27f2-5d2a-4f3a-ba7e-76639d203cbe" alt="Image">
+<img src="https://github.com/user-attachments/assets/977f1d57-0e8e-47c0-a8b0-2c08d8af4673" alt="Image">
+<img src="https://github.com/user-attachments/assets/f049add8-3888-4ba5-8717-52913ca0036d" alt="Image">
+<img src="https://github.com/user-attachments/assets/e9fa7ce8-e838-4540-a594-2f8a83cfe16d" alt="Image">
+<img src="https://github.com/user-attachments/assets/cb380e30-3c1f-474d-8e1a-e8f4dcc67bde" alt="Image">
+<img src="https://github.com/user-attachments/assets/725212d0-7b64-489b-9550-0ad5a91be899" alt="Image">
+<img src="https://github.com/user-attachments/assets/c167f510-5b67-437f-a4b8-80f2d5c0a9a0" alt="Image">
+<img src="https://github.com/user-attachments/assets/38047f04-97ab-46c5-a387-11c46a16b67a" alt="Image">
+<img src="https://github.com/user-attachments/assets/0b175813-3d4f-49f2-b6d8-5b59cbd120a6" alt="Image">
+
+
