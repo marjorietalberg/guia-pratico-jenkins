@@ -14,7 +14,7 @@
 
  <table>
   <tr>
-    <td width="40%">
+    <td width="900px">
       <h2>🎯 Objetivo</h2>
       <p>
         O objetivo deste projeto foi realizar a configuração e execução de um pipeline de <b>CI/CD</b> totalmente em ambiente <b>local</b>, utilizando o sistema operacional <b>Ubuntu</b>.<br><br>
@@ -25,7 +25,7 @@
         - ☸️ Integração com o <b>Kubernetes local</b>, para realizar o deploy das aplicações de forma automatizada e escalável dentro dos clusters.<br><br>
       </p>
     </td>
-    <td width="40%">
+    <td width="900px">
       <img src="https://github.com/user-attachments/assets/1615189d-6447-46b5-9414-bbd96af02ec4" alt="Projeto CI/CD" height="350px" />
     </td>
   </tr>
