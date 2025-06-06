@@ -187,11 +187,104 @@ Email address: → Seu e-mail (importante para notificações do Jenkins)
  > | Essa seção é o painel central de administração do Jenkins, onde você pode gerenciar configurações, instalar e atualizar plugins, controlar a segurança, configurar ferramentas e realizar outras tarefas administrativas essenciais.
 
 <img src="https://github.com/user-attachments/assets/b68d27f2-5d2a-4f3a-ba7e-76639d203cbe" alt="Image">
+
+### 🧩 5º Passo – Acessando os Plugins no Jenkins
+ > | Após acessar “Gerenciar Jenkins”, você poderá visualizar várias opções de configuração.
+
+
 <img src="https://github.com/user-attachments/assets/977f1d57-0e8e-47c0-a8b0-2c08d8af4673" alt="Image">
+
+### 6º Passo – Instalar os Plugins Necessários (Docker, Docker Pipeline, Kubernetes CLI)
+ > | Agora dentro da seção “Gerenciar Plugins”, siga os passos abaixo para instalar os plugins essenciais que permitirão criar pipelines modernos e integrar seu Jenkins com containers e clusters Kubernetes.
+Passo a passo para instalar os plugins:
+ >  1️⃣ Clique na aba “Disponíveis”
+ >  ➡️ Aqui estão todos os plugins que podem ser instalados no Jenkins.
+
+ >  2️⃣ Na barra de busca, pesquise e selecione os seguintes plugins:
+
+ > 🔹 Docker → Permite que o Jenkins interaja com o Docker Host.
+
+ >  🔹 Docker Pipeline → Adiciona suporte para executar etapas de pipeline diretamente em containers Docker.
+
+ > 🔹 Kubernetes CLI Plugin → Permite que pipelines do Jenkins executem comandos no Kubernetes via kubectl diretamente do Jenkins.
+
+ >  3️⃣ Marque a caixinha de cada plugin encontrado.
+
 <img src="https://github.com/user-attachments/assets/f049add8-3888-4ba5-8717-52913ca0036d" alt="Image">
+
+### 7º Passo – Criar um Novo Pipeline no Jenkins
+ > | Com os plugins já instalados, agora é hora de criar o seu primeiro pipeline no Jenkins. Essa etapa é essencial para automatizar o processo de build, teste  > e deploy da sua aplicação.
+
+ >  1️⃣ No Painel Principal do Jenkins, clique em:
+ Novo Item
+
+ > 2️⃣ Na tela que abrir:
+ > 📝 Dê um nome ao seu projeto (Ex: pipeline-docker-k8s)
+
+ >  ✅ Selecione a opção "Pipeline"
+
+Clique em OK
+
 <img src="https://github.com/user-attachments/assets/e9fa7ce8-e838-4540-a594-2f8a83cfe16d" alt="Image">
+
+##  Passo 8º – Configurar o Pipeline com Script do Git
+ > | Agora que o pipeline foi criado, é hora de conectá-lo ao seu repositório Git, onde está o Jenkinsfile com as etapas da automação (build, test, deploy etc.).
+Acesse as configurações do pipeline criado.
+
+ > Vá até a seção Pipeline.
+
+ > Altere o campo Definição para "Pipeline script from SCM".
+
+ > Escolha Git como sistema de controle de versão.
+
+ > Insira a URL do seu repositório Git onde está o Jenkinsfile.
+
+ > Se necessário, adicione suas credenciais (caso o repositório seja privado).
+
+ > No campo Branches to build, substitua */master por */main.
+
+ > Clique em Salvar para aplicar as configurações.
+
+#### ✅ Objetivo:
+Conectar o Jenkins ao seu repositório Git para que ele busque e execute o Jenkinsfile diretamente do branch main.
+
 <img src="https://github.com/user-attachments/assets/cb380e30-3c1f-474d-8e1a-e8f4dcc67bde" alt="Image">
+
+### 9º Passo – Pipeline Funcionando com Sucesso
+📌 O que aconteceu:
+Após configurar corretamente o pipeline com o repositório Git, o Jenkins buscou o Jenkinsfile no branch main.
+
+O pipeline foi executado automaticamente com base nas etapas definidas no Jenkinsfile.
+
+O console do Jenkins exibiu o processo de build, testes e deploy conforme configurado.
+
+O status da execução foi indicado como "Sucesso" com um ícone verde na interface.
+
 <img src="https://github.com/user-attachments/assets/725212d0-7b64-489b-9550-0ad5a91be899" alt="Image">
+
+ ### Execução do Pipeline – Jenkins
+Após o pipeline ter sido executado com sucesso, essas foram as etapas (stages) processadas:
+
+🗂️ Stage: Checkout SCM
+Tempo: 0,65s
+
+Descrição: Nesta etapa, o Jenkins realizou o checkout do repositório Git, baixando os arquivos necessários para a execução do pipeline.
+
+🔄 Stage: Checkout SCM (repetição)
+Tempo: 0,5s
+
+Descrição: Uma segunda verificação ou pull do repositório foi feita, comum em pipelines mais complexos ou que usam múltiplos workspaces.
+
+🛠️ Stage: Build Docker Image
+Tempo: 1,9s
+
+Descrição: O Jenkins construiu a imagem Docker definida no Dockerfile, empacotando a aplicação com suas dependências.
+
+📤 Stage: Push Docker Image
+Tempo: 11s
+
+Descrição: A imagem Docker foi enviada (push) para o repositório de imagens (Docker Hub ou outro registry), tornando-a disponível para deploy.
+
 <img src="https://github.com/user-attachments/assets/c167f510-5b67-437f-a4b8-80f2d5c0a9a0" alt="Image">
 <img src="https://github.com/user-attachments/assets/38047f04-97ab-46c5-a387-11c46a16b67a" alt="Image">
 <img src="https://github.com/user-attachments/assets/0b175813-3d4f-49f2-b6d8-5b59cbd120a6" alt="Image">
