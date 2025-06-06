@@ -254,14 +254,14 @@ Conectar o Jenkins ao seu repositório Git para que ele busque e execute o Jenki
 <img src="https://github.com/user-attachments/assets/cb380e30-3c1f-474d-8e1a-e8f4dcc67bde" alt="Image">
 
 ### 9º Passo – Pipeline Funcionando com Sucesso
-📌 O que aconteceu:
-Após configurar corretamente o pipeline com o repositório Git, o Jenkins buscou o Jenkinsfile no branch main.
+ >  📌 O que aconteceu:
+ >  Após configurar corretamente o pipeline com o repositório Git, o Jenkins buscou o Jenkinsfile no branch main.
 
-O pipeline foi executado automaticamente com base nas etapas definidas no Jenkinsfile.
+ >  O pipeline foi executado automaticamente com base nas etapas definidas no Jenkinsfile.
 
-O console do Jenkins exibiu o processo de build, testes e deploy conforme configurado.
+ >  O console do Jenkins exibiu o processo de build, testes e deploy conforme configurado.
 
-O status da execução foi indicado como "Sucesso" com um ícone verde na interface.
+ >  O status da execução foi indicado como "Sucesso" com um ícone verde na interface.
 
 <img src="https://github.com/user-attachments/assets/725212d0-7b64-489b-9550-0ad5a91be899" alt="Image">
 
@@ -303,4 +303,52 @@ Tempo: 11s
 ### Frontend Estilizado da Aplicação de Conversão de Temperatura Rodando no Docker
 <img src="https://github.com/user-attachments/assets/0b175813-3d4f-49f2-b6d8-5b59cbd120a6" alt="Image">
 
+---
+### 🔗 Observações – Como Configurar o Webhook no GitHub para Jenkins
+ > Para que seu Jenkins dispare automaticamente a pipeline sempre que houver um push no repositório GitHub, você precisa configurar um webhook. Aqui estão as instruções passo a passo:
+
+ > 🧩 Etapas no Jenkins:
+ > Acesse o painel principal do Jenkins.
+
+> Vá em Gerenciar Jenkins > Gerenciar Plugins e verifique se o plugin "GitHub Integration Plugin" está instalado.
+
+> Depois, vá em Gerenciar Jenkins > Configurar o Sistema.
+
+> Na seção GitHub, adicione as credenciais do GitHub (token pessoal).
+
+ > Em seguida, no seu job/pipeline, vá em Configurar.
+
+Marque a opção:
+ > ✅ "GitHub hook trigger for GITScm polling"
+
+ > 🌐 Etapas no GitHub:
+Acesse o repositório onde está seu código.
+
+> Vá até Settings > Webhooks.
+
+> Clique em “Add webhook”.
+
+> Preencha os campos assim:
+
+> Payload URL:
+> ( IP público do seu servidor Jenkins)
+
+> Content type:
+> application/json
+
+ > Which events would you like to trigger this webhook?
+> ✅ Just the push event
+
+> Marque a opção Active.
+
+> Clique em “Add webhook”.
+
+ > ✅ Resultado esperado:
+> A cada push no GitHub, o webhook envia um evento para o Jenkins.
+
+> O Jenkins, por sua vez, executa automaticamente o pipeline, buscando as atualizações no seu repositório.
+
+<img src="https://github.com/user-attachments/assets/7d639192-623d-4e92-aa5b-d9be496804af" alt="Image 1">
+
+<img src="https://github.com/user-attachments/assets/123d09f4-7b5b-46e7-b05e-03dfd977bef0" alt="Image 2">
 
