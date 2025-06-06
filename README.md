@@ -148,55 +148,58 @@ Para instalar o kubectl, siga os passos abaixo:
 ### Automatizando Deploy com Jenkins: Resultado Final + Passo a Passo com Imagens
 
 ### 1º Passo – Acessar o Jenkins no Navegador
-  > | Após subir o container do Jenkins, acesse o Jenkins através do seu navegador utilizando seu endereço
-  > | O Jenkins solicita uma senha inicial para desbloqueio. Essa senha é gerada automaticamente na criação do container.
-  > | ➡️ Para obter a senha, execute no terminal:
+  >  Após subir o container do Jenkins, acesse o Jenkins através do seu navegador utilizando seu endereço
+  >  O Jenkins solicita uma senha inicial para desbloqueio. Essa senha é gerada automaticamente na criação do container.
+  >  ➡️ Para obter a senha, execute no terminal:
 ```bash
 docker exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 <img src="https://github.com/user-attachments/assets/479ef5e8-bb1d-4584-98dc-877eb8dc2261" alt="Image">
 
 ### 2º Passo – Criar sua Conta no Jenkins (Usuário Admin)
-  > | Após concluir a instalação dos plugins, o Jenkins irá direcionar você para a tela de criação do primeiro usuário administrador.
+  > Após concluir a instalação dos plugins, o Jenkins irá direcionar você para a tela de criação do primeiro usuário administrador.
 
-  > | ➡️ Preencha o formulário com seus dados:
-  > | Username: → Seu nome de usuário (será usado para login no Jenkins) 
+  >  ➡️ Preencha o formulário com seus dados:
+  >  Username: → Seu nome de usuário (será usado para login no Jenkins) 
 
-v Password: → Sua senha (crie uma senha forte e segura)
+ > Password: → Sua senha (crie uma senha forte e segura)
 
-Confirm password: → Confirme sua senha
+ > Confirm password: → Confirme sua senha
 
-Full name: → Seu nome completo
+ > Full name: → Seu nome completo
 
-Email address: → Seu e-mail (importante para notificações do Jenkins)
+ > Email address: → Seu e-mail (importante para notificações do Jenkins)
+
 <img src="https://github.com/user-attachments/assets/eed9e951-292c-48bd-851c-0b88ae302cf9" alt="Image">
 
 ### 3º Passo – Customizar o Jenkins (Instalação dos Plugins)
-  > | Após inserir a senha inicial, o Jenkins oferece a opção de personalizar a instalação com plugins.
-  > | ✔️ Escolha a Opção: Install Suggested Plugins
-   > | Essa opção é a mais recomendada para quem está começando, pois instala os plugins essenciais para rodar a maioria dos pipelines.
+  >  Após inserir a senha inicial, o Jenkins oferece a opção de personalizar a instalação com plugins.
+> 
+  >  ✔️ Escolha a Opção: Install Suggested Plugins
+   >  Essa opção é a mais recomendada para quem está começando, pois instala os plugins essenciais para rodar a maioria dos pipelines.
 
-  > | O Jenkins começará automaticamente a instalação dos plugins padrão, como:
-  > | Git ,Pipeline, SSH Agent, Docker Pipeline, Blue Ocean
-  > | E outros essenciais para integração contínua e deploy.
+  > O Jenkins começará automaticamente a instalação dos plugins padrão, como:
+  > Git ,Pipeline, SSH Agent, Docker Pipeline, Blue Ocean
+  > E outros essenciais para integração contínua e deploy.
 
 <img src="https://github.com/user-attachments/assets/f276f09c-e8b3-4ed4-a3cb-b926719a8810" alt="Image">
 
 ### 4º Passo – Acessar o Painel Principal e Ir em “Gerenciar Jenkins”
-  > | Após criar sua conta e finalizar a configuração inicial, você será redirecionado para o Painel Principal do Jenkins. 
- > | Essa seção é o painel central de administração do Jenkins, onde você pode gerenciar configurações, instalar e atualizar plugins, controlar a segurança, configurar ferramentas e realizar outras tarefas administrativas essenciais.
+  >  Após criar sua conta e finalizar a configuração inicial, você será redirecionado para o Painel Principal do Jenkins. 
+ > Essa seção é o painel central de administração do Jenkins, onde você pode gerenciar configurações, instalar e atualizar plugins, controlar a segurança, configurar ferramentas e realizar outras tarefas administrativas essenciais.
 
 <img src="https://github.com/user-attachments/assets/b68d27f2-5d2a-4f3a-ba7e-76639d203cbe" alt="Image">
 
-### 🧩 5º Passo – Acessando os Plugins no Jenkins
- > | Após acessar “Gerenciar Jenkins”, você poderá visualizar várias opções de configuração.
+###  5º Passo – Acessando os Plugins no Jenkins
+ >  Após acessar “Gerenciar Jenkins”, você poderá visualizar várias opções de configuração.
 
 
 <img src="https://github.com/user-attachments/assets/977f1d57-0e8e-47c0-a8b0-2c08d8af4673" alt="Image">
 
 ### 6º Passo – Instalar os Plugins Necessários (Docker, Docker Pipeline, Kubernetes CLI)
- > | Agora dentro da seção “Gerenciar Plugins”, siga os passos abaixo para instalar os plugins essenciais que permitirão criar pipelines modernos e integrar seu Jenkins com containers e clusters Kubernetes.
+ >  Agora dentro da seção “Gerenciar Plugins”, siga os passos abaixo para instalar os plugins essenciais que permitirão criar pipelines modernos e integrar seu Jenkins com containers e clusters Kubernetes.
 Passo a passo para instalar os plugins:
+> 
  >  1️⃣ Clique na aba “Disponíveis”
  >  ➡️ Aqui estão todos os plugins que podem ser instalados no Jenkins.
 
@@ -213,7 +216,7 @@ Passo a passo para instalar os plugins:
 <img src="https://github.com/user-attachments/assets/f049add8-3888-4ba5-8717-52913ca0036d" alt="Image">
 
 ### 7º Passo – Criar um Novo Pipeline no Jenkins
- > | Com os plugins já instalados, agora é hora de criar o seu primeiro pipeline no Jenkins. Essa etapa é essencial para automatizar o processo de build, teste  > e deploy da sua aplicação.
+ >  Com os plugins já instalados, agora é hora de criar o seu primeiro pipeline no Jenkins. Essa etapa é essencial para automatizar o processo de build, teste  > e deploy da sua aplicação.
 
  >  1️⃣ No Painel Principal do Jenkins, clique em:
  Novo Item
@@ -227,8 +230,8 @@ Clique em OK
 
 <img src="https://github.com/user-attachments/assets/e9fa7ce8-e838-4540-a594-2f8a83cfe16d" alt="Image">
 
-##  Passo 8º – Configurar o Pipeline com Script do Git
- > | Agora que o pipeline foi criado, é hora de conectá-lo ao seu repositório Git, onde está o Jenkinsfile com as etapas da automação (build, test, deploy etc.).
+##  8º Passo  – Configurar o Pipeline com Script do Git
+ >  Agora que o pipeline foi criado, é hora de conectá-lo ao seu repositório Git, onde está o Jenkinsfile com as etapas da automação (build, test, deploy etc.).
 Acesse as configurações do pipeline criado.
 
  > Vá até a seção Pipeline.
@@ -263,30 +266,41 @@ O status da execução foi indicado como "Sucesso" com um ícone verde na interf
 <img src="https://github.com/user-attachments/assets/725212d0-7b64-489b-9550-0ad5a91be899" alt="Image">
 
  ### Execução do Pipeline – Jenkins
-Após o pipeline ter sido executado com sucesso, essas foram as etapas (stages) processadas:
+ >  Após o pipeline ter sido executado com sucesso, essas foram as etapas (stages) processadas:
 
-🗂️ Stage: Checkout SCM
+ > 🗂️ Stage: Checkout SCM
 Tempo: 0,65s
 
 Descrição: Nesta etapa, o Jenkins realizou o checkout do repositório Git, baixando os arquivos necessários para a execução do pipeline.
 
-🔄 Stage: Checkout SCM (repetição)
+ > 🔄 Stage: Checkout SCM (repetição)
 Tempo: 0,5s
 
 Descrição: Uma segunda verificação ou pull do repositório foi feita, comum em pipelines mais complexos ou que usam múltiplos workspaces.
 
-🛠️ Stage: Build Docker Image
+ > 🛠️ Stage: Build Docker Image
 Tempo: 1,9s
 
 Descrição: O Jenkins construiu a imagem Docker definida no Dockerfile, empacotando a aplicação com suas dependências.
 
-📤 Stage: Push Docker Image
+ > 📤 Stage: Push Docker Image
 Tempo: 11s
 
-Descrição: A imagem Docker foi enviada (push) para o repositório de imagens (Docker Hub ou outro registry), tornando-a disponível para deploy.
+ > Descrição: A imagem Docker foi enviada (push) para o repositório de imagens (Docker Hub ou outro registry), tornando-a disponível para deploy.
 
 <img src="https://github.com/user-attachments/assets/c167f510-5b67-437f-a4b8-80f2d5c0a9a0" alt="Image">
+
+### 📌 Etapa Final – Aplicação Executando no Docker
+
+ > O Jenkins construiu e enviou a imagem Docker com sucesso para o repositório.
+
+ > Em seguida, a imagem foi utilizada para subir um container Docker.
+
+ > Esse container está executando a aplicação web de conversão de temperatura, com base no arquivo index.ejs.
+
 <img src="https://github.com/user-attachments/assets/38047f04-97ab-46c5-a387-11c46a16b67a" alt="Image">
+
+### Frontend Estilizado da Aplicação de Conversão de Temperatura Rodando no Docker
 <img src="https://github.com/user-attachments/assets/0b175813-3d4f-49f2-b6d8-5b59cbd120a6" alt="Image">
 
 
